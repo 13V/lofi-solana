@@ -1,0 +1,33 @@
+[package]
+name = "lofi_rewards"
+version = "0.1.0"
+description = "On-chain rewards rails for lofi-solana: oracle-attested, cumulative Merkle SOL distribution per song."
+edition = "2021"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "lofi_rewards"
+
+[features]
+# Anchor build features.
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+# NOTE: Per current research, Anchor 1.0 is the latest release line, but we
+# pin to 0.30.x here for tooling stability (avm / `anchor` CLI ecosystem and
+# the TS client `@coral-xyz/anchor@^0.30`). Bump to 1.x once the toolchain in
+# CI is upgraded in lockstep.
+#
+# `init-if-needed` is required by the `Claim` context (ClaimStatus is created
+# on first claim and reused afterward).
+anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
+
+# TODO(audit): if `song_mint` is upgraded from UncheckedAccount to a typed
+# `Account<Mint>`, add:
+# anchor-spl = "0.30.1"

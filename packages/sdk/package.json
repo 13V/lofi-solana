@@ -1,0 +1,51 @@
+{
+  "name": "@lofi/sdk",
+  "version": "0.1.0",
+  "description": "Lofi Solana SDK — token launch, listen qualification, reward distribution",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./launch": {
+      "import": "./dist/launch/index.js",
+      "types": "./dist/launch/index.d.ts"
+    },
+    "./listen": {
+      "import": "./dist/listen/session.js",
+      "types": "./dist/listen/session.d.ts"
+    },
+    "./rewards": {
+      "import": "./dist/rewards/merkle.js",
+      "types": "./dist/rewards/merkle.d.ts"
+    },
+    "./metadata": {
+      "import": "./dist/metadata.js",
+      "types": "./dist/metadata.d.ts"
+    },
+    "./config": {
+      "import": "./dist/config.js",
+      "types": "./dist/config.d.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.95.0",
+    "@noble/hashes": "^1.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

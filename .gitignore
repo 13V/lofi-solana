@@ -1,0 +1,34 @@
+# dependencies
+node_modules/
+.pnp.*
+.yarn/*
+
+# builds
+dist/
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# rust / anchor
+target/
+.anchor/
+test-ledger/
+**/*.rs.bk
+
+# solana keypairs / secrets
+.env
+.env.local
+.env.*.local
+**/*-keypair.json
+wallets/
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+.turbo/
+coverage/
+.idea/
+.vscode/*
+!.vscode/extensions.json

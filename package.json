@@ -1,0 +1,22 @@
+{
+  "name": "lofi-solana",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Make a lofi beat in your browser, coin it on Solana, and earn from trading fees weighted by verified listens.",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "turbo": "^2.1.3",
+    "typescript": "^5.6.3"
+  }
+}

@@ -1,0 +1,5 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+# NOTE: programs/ (Anchor) has its own Cargo + node toolchain and is intentionally
+# excluded from the pnpm workspace. Build/test it with `anchor build` / `anchor test`.
