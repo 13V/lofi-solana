@@ -71,6 +71,23 @@ agents converged on this — it's the one.)
   glitch type + abstract floating 3D blobs (now strongly "rug-pull-coded"). These also
   conflict with our "not an investment" legal posture — so they're out on two counts.
 
+**Live-feed implementation cheat-sheet (from the crypto-UI research):**
+- **Ticker:** Motion React `<Ticker>` (velocity in px/s, `axis`, honors reduced-motion,
+  ~2.1 kb) or a CSS `@keyframes scroll` marquee; pause-on-hover to read; per-chip
+  `[cover][$TICKER][price][▲±%]`.
+- **Tabular numbers everywhere** (`font-variant-numeric: tabular-nums`) on prices/listens so
+  live updates don't jitter the layout.
+- **Launch/trade feed row:** `[NEW/BUY/SELL] · [wallet 4…4] · [amount] · [$ticker] · [price]
+  · [3s ago]`; new rows slide in from top 150–200 ms ease-out; pair every color with an
+  arrow/icon (~8% of users have CVD).
+- **Social-proof toast:** bottom-left, slide+fade 0.3 s in, hold 3–6 s, ≤3 stacked (1 vh
+  gap); copy "◉ someone just coined **$LOFI** — 4s ago" (specificity > generic);
+  `aria-live="polite"`.
+- **Number roll** on price/stat change 200–300 ms ease (never hard-jump); a 1–2 s **pulsing
+  dot** = "live connection." Motion is feedback, not decor — *flashing prices create
+  anxiety*, so flash-then-settle.
+- Ready-made starters: shadcn/ui **Web3 Activity Feed** block; **Motion React Ticker**.
+
 ## Motion stack (2026)
 - **Lenis** smooth scroll, driven by **GSAP's ticker** (run ScrollTrigger off Lenis or
   positions jitter — the known gotcha).
