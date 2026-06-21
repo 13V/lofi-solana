@@ -1,83 +1,167 @@
 @import "tailwindcss";
 
-/* ── Design tokens ──────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   lofi.sol — "Bedroom Studio at Golden Hour" design system
+   Cozy analog × living digital. Warm dusk, vinyl, tape grain — with crisp,
+   live data energy. Tokens below extend the original scaffold tokens (kept
+   intact so /studio and /track keep working).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-  /* Base palette — cassette / vinyil warmth */
-  --background: #0f0e0c;
-  --surface-1: #1a1815;
-  --surface-2: #242220;
-  --surface-3: #2e2b28;
-  --border: #3a3530;
-  --border-subtle: #2a2722;
+  /* ── Base (warm near-black, kept from scaffold) ── */
+  --background: #100b14;
+  --ink: #100b14;
+  --surface-1: #181019;
+  --surface-2: #221726;
+  --surface-3: #2c1f30;
+  --border: #3a2d3f;
+  --border-subtle: #271d2b;
 
-  /* Accent — warm amber / lofi tape */
-  --accent: #e8a045;
+  /* ── Warm accents — golden hour ── */
+  --accent: #e8a045;          /* primary amber (scaffold) */
   --accent-dim: #a86e24;
-  --accent-glow: rgba(232, 160, 69, 0.15);
+  --accent-glow: rgba(232, 160, 69, 0.18);
+  --gold: #f2b66b;            /* brighter CTA highlight */
+  --peach: #f7c6a7;
+  --rose: #e08fb0;
+  --plum: #6b4ab3;
+  --dusk-violet: #9075d8;
+  --vu-mint: #6fe0c2;          /* live-data accent ONLY */
 
-  /* Text */
-  --text-primary: #f0ebe3;
-  --text-secondary: #9a9188;
-  --text-muted: #5c5650;
+  /* ── Text ── */
+  --text-primary: #f4ece2;
+  --text-secondary: #b9aec4;
+  --text-muted: #6c6473;
+  --cream: #f4ece2;
 
-  /* Status */
-  --green: #5fb87a;
-  --red: #e05c5c;
+  /* ── Status (directional) ── */
+  --green: #6fe0a0;
+  --red: #f0708a;
   --blue: #5b9bd5;
+
+  /* ── Signature golden-hour gradient ── */
+  --golden-hour: linear-gradient(135deg, #f7c6a7 0%, #e08fb0 48%, #6b4ab3 100%);
+  --dusk: radial-gradient(120% 120% at 50% 0%, #2c1f30 0%, #100b14 60%);
+
+  /* ── Type ── */
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
-/* ── Global resets ──────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* ── Resets ── */
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
-  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
   background-color: var(--background);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
+body { min-height: 100dvh; overflow-x: hidden; }
 
-body {
-  min-height: 100dvh;
-}
+::selection { background: var(--gold); color: #1a1208; }
 
-/* ── Scrollbar ──────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--surface-1);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
-}
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--surface-1); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }
 
-/* ── Tailwind v4 custom utilities ───────────────────── */
+/* ═══════════════════════════════════════════════════════════════════════════
+   Utilities (Tailwind v4 @layer)
+   ═══════════════════════════════════════════════════════════════════════════ */
 @layer utilities {
+  /* surfaces / colours (scaffold-compatible) */
   .bg-surface-1 { background-color: var(--surface-1); }
   .bg-surface-2 { background-color: var(--surface-2); }
   .bg-surface-3 { background-color: var(--surface-3); }
   .border-subtle { border-color: var(--border-subtle); }
   .border-warm { border-color: var(--border); }
   .text-accent { color: var(--accent); }
+  .text-gold { color: var(--gold); }
   .text-secondary { color: var(--text-secondary); }
   .text-muted { color: var(--text-muted); }
+  .text-mint { color: var(--vu-mint); }
+  .text-cream { color: var(--cream); }
   .bg-accent { background-color: var(--accent); }
-  .glow-accent { box-shadow: 0 0 20px var(--accent-glow); }
+  .glow-accent { box-shadow: 0 0 28px var(--accent-glow); }
+
+  /* type */
+  .font-display { font-family: var(--font-display); font-optical-sizing: auto; }
+  .font-mono-tape { font-family: var(--font-mono); }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .tracking-tightest { letter-spacing: -0.04em; }
+
+  /* golden-hour text + surfaces */
+  .text-gh {
+    background: var(--golden-hour);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-gh { background: var(--golden-hour); }
+  .glass {
+    background: rgba(24, 16, 25, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(244, 236, 226, 0.08);
+  }
+
+  /* edge fade mask for marquees */
+  .mask-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
 }
 
-/* ── Step-sequencer grid ────────────────────────────── */
-.step-active {
-  background-color: var(--accent);
-  box-shadow: 0 0 8px var(--accent-glow);
+/* ── Marquee ── */
+.marquee { overflow: hidden; }
+.marquee-track { display: flex; width: max-content; will-change: transform; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Keyframes
+   ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes marquee-x      { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+@keyframes marquee-x-rev  { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes spin-vinyl     { to { transform: rotate(360deg); } }
+@keyframes float-y        { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulse-dot      { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 var(--vu-mint); } 50% { opacity: .65; box-shadow: 0 0 0 4px rgba(111,224,194,0); } }
+@keyframes shimmer        { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes gh-shift       { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes rise-in        { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes grain-shift {
+  0% { transform: translate(0,0); } 10% { transform: translate(-4%,-4%); }
+  30% { transform: translate(3%,-2%); } 50% { transform: translate(-2%,4%); }
+  70% { transform: translate(4%,2%); } 90% { transform: translate(-3%,-3%); }
+  100% { transform: translate(0,0); }
 }
 
-.step-playing {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
+/* ── Scroll reveal ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.reveal--in { opacity: 1; transform: none; }
+
+/* ── Film grain overlay (the #1 lofi signal) ── */
+.grain-overlay {
+  position: fixed; inset: -50%;
+  width: 200%; height: 200%;
+  pointer-events: none; z-index: 100;
+  opacity: .42; mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 1.2s steps(4) infinite;
+}
+
+/* ── Step sequencer (scaffold-compatible) ── */
+.step-active  { background-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+.step-playing { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .grain-overlay { animation: none; }
+  .reveal { opacity: 1; transform: none; }
 }

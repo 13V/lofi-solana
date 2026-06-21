@@ -50,6 +50,10 @@ export function LaunchDialog() {
   };
 
   const handleConfirm = async () => {
+    if (!publicKey) {
+      setWalletModalVisible(true);
+      return;
+    }
     setStep("signing");
 
     try {
